@@ -2,12 +2,12 @@
 
     <servlet>
         <servlet-name>portal</servlet-name>
-        <servlet-class>com.dmmikkel.cms.core.PortalServlet</servlet-class>
+        <servlet-class>com.dmmikkel.brisk.core.PortalServlet</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>admin</servlet-name>
-        <servlet-class>com.dmmikkel.cms.admin.AdminServlet</servlet-class>
+        <servlet-class>com.dmmikkel.brisk.admin.AdminServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
