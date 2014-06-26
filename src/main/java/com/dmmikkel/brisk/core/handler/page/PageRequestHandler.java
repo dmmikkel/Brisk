@@ -102,7 +102,7 @@ public class PageRequestHandler
 
     private ContentCollection getContent(Site site, Page page, String[] urlParts)
             throws Exception
-    {System.out.println(page.contentQueryMethod);
+    {
         ContentCollection contents;
         switch (page.contentQueryMethod)
         {

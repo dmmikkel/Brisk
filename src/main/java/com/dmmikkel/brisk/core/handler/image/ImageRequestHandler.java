@@ -184,7 +184,7 @@ public class ImageRequestHandler
     {
         int maxWidth = context.cmsContext.settings.imageMaxWidth;
 
-        if (width > maxWidth)
+        if (maxWidth > 0 && width > maxWidth)
             width = maxWidth;
 
         if (width > image.getWidth())

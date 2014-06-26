@@ -1,5 +1,6 @@
 package com.dmmikkel.brisk.core;
 
+import com.dmmikkel.brisk.core.cache.VhostCache;
 import com.dmmikkel.brisk.data.Client;
 import net.sf.ehcache.CacheManager;
 
@@ -16,4 +17,5 @@ public class CMSContext
     public CacheManager cacheManager;
     public Client       client;
     public Settings     settings;
+    public VhostCache vhostCache;
 }

@@ -2,8 +2,6 @@ package com.dmmikkel.brisk.core.handler;
 
 import com.dmmikkel.brisk.data.Client;
 import com.dmmikkel.brisk.data.model.Site;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,18 +29,7 @@ public abstract class Handler
         if (!isValidHostname(http_host))
             throw new Exception("Invalid characters in host name.");
 
-        Cache cache = context.cmsContext.cacheManager.getCache("vhostcache");
-
-        Element element;
-        if ((element = cache.get(http_host)) != null)
-        {
-            context.statsEntry.vhostCacheHit = true;
-            return (Site) element.getObjectValue();
-        }
-
-        Site site = client.getSiteFromDomain(http_host);
-        cache.put(new Element(http_host, site));
-        return site;
+        return context.cmsContext.vhostCache.hostLookup(http_host);
     }
 
     protected void render404()

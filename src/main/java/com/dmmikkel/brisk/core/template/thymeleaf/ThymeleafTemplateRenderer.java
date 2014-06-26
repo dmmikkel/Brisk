@@ -57,6 +57,6 @@ public class ThymeleafTemplateRenderer
         return templateEngineInstance;
     }
 
-    // TODO: Maybe create and store instances of ViewProcessors instead of static storage here
+    // TODO: This will only create one template engine for the first site accessed. Need to implement something that works on all sites.
     private static TemplateEngine templateEngineInstance;
 }

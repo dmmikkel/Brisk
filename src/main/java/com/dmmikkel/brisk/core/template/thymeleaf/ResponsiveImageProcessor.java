@@ -43,7 +43,7 @@ public class ResponsiveImageProcessor
         int width = Integer.parseInt(strWidth);
         int maxWidth = cmsContext.settings.imageMaxWidth;
 
-        if (width > maxWidth)
+        if (maxWidth > 0 && width > maxWidth)
             width = maxWidth;
 
         Element noscript = new Element("noscript");

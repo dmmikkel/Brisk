@@ -5,6 +5,7 @@ import com.dmmikkel.brisk.data.exception.ConnectionException;
 import com.dmmikkel.brisk.data.exception.NotFoundException;
 import com.dmmikkel.brisk.data.model.*;
 import com.google.gson.Gson;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -12,6 +13,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PostgresqlClient
@@ -24,12 +26,12 @@ public class PostgresqlClient
         try
         {
             InitialContext context = new InitialContext();
-            DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/brisk");
+            DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/cms");
             return dataSource.getConnection();
         }
         catch (NamingException e)
         {
-            throw new ConnectionException("Failed lookup for jdbc/brisk..", e);
+            throw new ConnectionException("Failed lookup for jdbc/cms..", e);
         }
         catch (SQLException e)
         {
@@ -339,5 +341,19 @@ public class PostgresqlClient
         {
             throw new ConnectionException("Could not prepare SQL statement.", e);
         }
+    }
+
+    @Override
+    public List<Page> getPages(String siteKey)
+            throws ClientException
+    {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void savePage(String key, Page page)
+            throws ClientException
+    {
+        throw new NotImplementedException();
     }
 }
