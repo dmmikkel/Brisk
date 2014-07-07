@@ -29,7 +29,9 @@ public class ThymeleafTemplateRenderer
         variables.put("page", context.page);
         variables.put("contents", context.contents);
 
-        Context thymeleafContext = new Context();
+        SiteContext thymeleafContext = new SiteContext();
+        thymeleafContext.setSiteKey(context.site.key);
+
         thymeleafContext.setVariables(variables);
 
         return templateEngine.process(context.page.masterTemplate, thymeleafContext);
@@ -41,10 +43,9 @@ public class ThymeleafTemplateRenderer
             return templateEngineInstance;
 
         templateEngineInstance = new TemplateEngine();
-        FileTemplateResolver templateResolver = new FileTemplateResolver();
-        templateResolver.setPrefix(context.siteTemplateDirectory.getAbsolutePath() + File.separator);
+        SiteTemplateResolver templateResolver = new SiteTemplateResolver();
+        templateResolver.setPrefix(context.cmsContext.sitesDirectory.getAbsolutePath() + File.separator);
         templateResolver.setSuffix(".html");
-        templateResolver.setCacheable(false);
         templateEngineInstance.setTemplateResolver(templateResolver);
 
         StandardDialect standardDialect = new StandardDialect();
@@ -57,6 +58,5 @@ public class ThymeleafTemplateRenderer
         return templateEngineInstance;
     }
 
-    // TODO: This will only create one template engine for the first site accessed. Need to implement something that works on all sites.
     private static TemplateEngine templateEngineInstance;
 }
