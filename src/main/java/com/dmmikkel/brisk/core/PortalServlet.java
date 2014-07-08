@@ -105,6 +105,8 @@ public class PortalServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException
     {
+        logger.info(request.getPathInfo());
+
         HandlerContext handlerContext = new HandlerContext(request, response, cmsContext);
 
         Router router = new Router();

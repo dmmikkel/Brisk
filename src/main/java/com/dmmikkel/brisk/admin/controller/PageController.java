@@ -1,37 +1,16 @@
 package com.dmmikkel.brisk.admin.controller;
 
-import com.dmmikkel.brisk.data.model.Page;
-import com.dmmikkel.brisk.data.model.Site;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.HashMap;
-import java.util.Map;
-
+@Controller
+@RequestMapping("/pages")
 public class PageController
-    extends Controller
 {
-    public Map<String, Object> getIndex()
+    @RequestMapping(method = RequestMethod.GET)
+    public String getAll()
     {
-        Site site = client.getSite("demo");
-        Map<String, Object> result = new HashMap<>();
-        result.put("pages", client.getPages(site.key));
-        return result;
-    }
-
-    public Map<String, Object> postNew()
-    {
-        Site site = client.getSite("demo");
-        Map<String, Object> result = new HashMap<>();
-
-        Page page = new Page();
-        // TODO do things with page
-        try {
-            client.savePage(site.key, page);
-            result.put("success", true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.put("success", false);
-            result.put("exception", e.toString());
-        }
-        return result;
+        return "pages/index";
     }
 }
