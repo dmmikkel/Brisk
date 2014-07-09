@@ -1,6 +1,7 @@
 package com.dmmikkel.brisk.core;
 
-import com.dmmikkel.brisk.core.handler.*;
+import com.dmmikkel.brisk.core.handler.Handler;
+import com.dmmikkel.brisk.core.handler.HandlerContext;
 import com.dmmikkel.brisk.core.handler.image.ImageRequestHandler;
 import com.dmmikkel.brisk.core.handler.page.PageRequestHandler;
 import com.dmmikkel.brisk.core.handler.resource.ResourceRequestHandler;

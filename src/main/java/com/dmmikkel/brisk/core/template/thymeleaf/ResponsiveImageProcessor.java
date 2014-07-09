@@ -1,7 +1,6 @@
 package com.dmmikkel.brisk.core.template.thymeleaf;
 
 import com.dmmikkel.brisk.core.CMSContext;
-import com.sun.imageio.plugins.common.ImageUtil;
 import org.apache.commons.codec.binary.Base64;
 import org.thymeleaf.Arguments;
 import org.thymeleaf.dom.Element;

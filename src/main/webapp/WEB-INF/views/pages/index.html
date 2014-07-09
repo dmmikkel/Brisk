@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Document</title>
 </head>
 <body>
-    <h1>Yay</h1>
-    <p>Thymeleaf op</p>
+    <h1>Pages</h1>
+    <ul class="page-list">
+        <li class="page" data-th-each="page : ${pages}" data-th-object="${page}" data-th-attr="data-pagekey=*{key}">
+            <h2 data-th-text="*{name}">page title</h2>
+        </li>
+    </ul>
 </body>
 </html>

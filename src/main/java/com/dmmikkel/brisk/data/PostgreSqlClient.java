@@ -179,33 +179,24 @@ public class PostgresqlClient
 
             Page page = new Page();
 
-            page.key = resultSet.getString("key");
-            page.name = resultSet.getString("name");
-            page.masterTemplate = resultSet.getString("master_template");
-            page.template = resultSet.getString("template");
-            page.contentQueryMethod = resultSet.getInt("content_query_method");
-            page.contentKey = resultSet.getString("content_key");
-            page.contentType = resultSet.getString("content_type");
-            page.orderBy = resultSet.getString("content_order_by");
-            page.orderDirection = resultSet.getString("content_order_direction");
-            page.count = resultSet.getInt("content_count");
+            page.setKey(resultSet.getString("key"));
+            page.setName(resultSet.getString("name"));
+            page.setMasterTemplate(resultSet.getString("master_template"));
+            page.setTemplate(resultSet.getString("template"));
+            page.setContentQueryMethod(resultSet.getInt("content_query_method"));
+            page.setContentKey(resultSet.getString("content_key"));
+            page.setContentType(resultSet.getString("content_type"));
+            page.setOrderBy(resultSet.getString("content_order_by"));
+            page.setOrderDirection(resultSet.getString("content_order_direction"));
+            page.setCount(resultSet.getInt("content_count"));
+
+            connection.close();
 
             return page;
         }
         catch (SQLException e)
         {
             throw new ConnectionException("Could not prepare SQL statement.", e);
-        }
-        finally
-        {
-            try
-            {
-                connection.close();
-            }
-            catch (SQLException e)
-            {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -347,7 +338,46 @@ public class PostgresqlClient
     public List<Page> getPages(String siteKey)
             throws ClientException
     {
-        throw new NotImplementedException();
+        Connection connection = getConnection();
+        try
+        {
+            final String query = "SELECT * FROM pages WHERE site_key = ?";
+
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, siteKey);
+            ResultSet resultSet = statement.executeQuery();
+
+            ArrayList<Page> pages = new ArrayList<>();
+            Page page;
+
+            while (resultSet.next())
+            {
+                page = new Page();
+
+                page.setKey(resultSet.getString("key"));
+                page.setName(resultSet.getString("name"));
+                page.setMasterTemplate(resultSet.getString("master_template"));
+                page.setTemplate(resultSet.getString("template"));
+                page.setContentQueryMethod(resultSet.getInt("content_query_method"));
+                page.setContentKey(resultSet.getString("content_key"));
+                page.setContentType(resultSet.getString("content_type"));
+                page.setOrderBy(resultSet.getString("content_order_by"));
+                page.setOrderDirection(resultSet.getString("content_order_direction"));
+                page.setCount(resultSet.getInt("content_count"));
+
+                pages.add(page);
+            }
+
+
+
+            connection.close();
+
+            return pages;
+        }
+        catch (SQLException e)
+        {
+            throw new ConnectionException("Could not prepare SQL statement.", e);
+        }
     }
 
     @Override

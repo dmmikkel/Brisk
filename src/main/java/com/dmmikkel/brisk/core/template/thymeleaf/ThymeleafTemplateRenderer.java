@@ -3,11 +3,9 @@ package com.dmmikkel.brisk.core.template.thymeleaf;
 import com.dmmikkel.brisk.core.template.TemplateContext;
 import com.dmmikkel.brisk.core.template.TemplateRenderer;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 import org.thymeleaf.processor.ElementNameProcessorMatcher;
 import org.thymeleaf.processor.IProcessor;
 import org.thymeleaf.standard.StandardDialect;
-import org.thymeleaf.templateresolver.FileTemplateResolver;
 
 import java.io.File;
 import java.util.HashMap;
@@ -34,7 +32,7 @@ public class ThymeleafTemplateRenderer
 
         thymeleafContext.setVariables(variables);
 
-        return templateEngine.process(context.page.masterTemplate, thymeleafContext);
+        return templateEngine.process(context.page.getMasterTemplate(), thymeleafContext);
     }
 
     public TemplateEngine getTemplateEngine(TemplateContext context)

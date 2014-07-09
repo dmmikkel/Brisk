@@ -104,13 +104,13 @@ public class PageRequestHandler
             throws Exception
     {
         ContentCollection contents;
-        switch (page.contentQueryMethod)
+        switch (page.getContentQueryMethod())
         {
             case 0:
                 return null;
             case 1: // getContentByKey
-                if (page.contentKey != null)
-                    contents = client.getContentByKey(site.key, page.contentKey);
+                if (page.getContentKey() != null)
+                    contents = client.getContentByKey(site.key, page.getContentKey());
                 else if (urlParts.length > 1)
                 {
                     contents = client.getContentByKey(site.key, urlParts[1]);
@@ -120,7 +120,7 @@ public class PageRequestHandler
                     throw new Exception("ContentKey not found.");
                 break;
             case 2: // getContentByContentType
-                contents = client.getContentByType(site.key, page.contentType, page.orderBy, page.orderDirection, page.count, 1);
+                contents = client.getContentByType(site.key, page.getContentType(), page.getOrderBy(), page.getOrderDirection(), page.getCount(), 1);
                 break;
             default:
                 contents = new ContentCollection();

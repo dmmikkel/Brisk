@@ -12,7 +12,7 @@
 
     <servlet-mapping>
         <servlet-name>admin</servlet-name>
-        <url-pattern>/_admin/*</url-pattern>
+        <url-pattern>/_admin/api/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
