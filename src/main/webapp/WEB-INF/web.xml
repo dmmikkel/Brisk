@@ -12,12 +12,12 @@
 
     <servlet-mapping>
         <servlet-name>admin</servlet-name>
-        <url-pattern>/_admin/api/*</url-pattern>
+        <url-pattern>/_api/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>
-        <url-pattern>/WEB-INF/*</url-pattern>
+        <url-pattern>/_admin/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

@@ -1,7 +1,7 @@
 package com.dmmikkel.brisk.admin.controller;
 
 import com.dmmikkel.brisk.data.Client;
-import com.dmmikkel.brisk.data.ClientFactory;
+import com.dmmikkel.brisk.data.jdbc.JdbcClient;
 import com.dmmikkel.brisk.data.model.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +21,16 @@ public class PageController
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public List<Page> getAll(HttpServletRequest request)
     {
-        request.getPathInfo();
-        Client client = ClientFactory.create();
+        Client client = new JdbcClient();
         return client.getPages("site_1");
+    }
+
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public Page getAll(HttpServletRequest request, @RequestBody Page page)
+    {
+        Client client = new JdbcClient();
+        client.savePage(page);
+        return client.getPage(page.getSiteKey(), page.getKey());
     }
 
     /**
@@ -35,7 +42,7 @@ public class PageController
     @RequestMapping(value = "/{pageKey}", method = RequestMethod.GET, produces = "application/json")
     public Page getPage(HttpServletRequest request, @PathVariable String pageKey)
     {
-        Client client = ClientFactory.create();
+        Client client = new JdbcClient();
         return client.getPage("site_1", pageKey);
     }
 
@@ -46,9 +53,12 @@ public class PageController
      * @return A page
      */
     @RequestMapping(value = "/{pageKey}", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public Page postPage(HttpServletRequest request, @RequestBody Page page)
+    public Page savePage(HttpServletRequest request, @RequestPart String pageKey, @RequestBody Page page)
     {
-        page.setName(request.getPathInfo());
+        if (pageKey != page.getKey());
+
+        Client client = new JdbcClient();
+        client.savePage(page);
         return page;
     }
 }

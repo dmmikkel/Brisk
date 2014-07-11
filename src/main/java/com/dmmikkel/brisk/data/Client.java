@@ -13,33 +13,43 @@ import java.util.Map;
 
 public interface Client
 {
+    /* Site */
+
     Site getSiteFromDomain(String domain)
-            throws ConnectionException, NotFoundException;
-
-    Site getSite(String siteKey)
-            throws ConnectionException, NotFoundException;
-
-    Map<String, String> getDomains()
             throws ClientException;
 
     Map<String, Site> getSites()
             throws ClientException;
 
+    Site getSite(String siteKey)
+            throws ClientException;
+
+    /* Domain */
+
+    Map<String, String> getDomains()
+            throws ClientException;
+
+    /* Page */
+
+    List<Page> getPages(String siteKey)
+            throws ClientException;
+
     Page getPage(String siteKey, String pageKey)
-            throws ConnectionException, NotFoundException;
+            throws ClientException;
+
+    void savePage(Page page)
+            throws ClientException;
+
+    /* Image */
 
     Image getImage(String imageKey)
             throws ClientException;
+
+    /* Content */
 
     ContentCollection getContentByKey(String siteKey, String key)
             throws ConnectionException, NotFoundException;
 
     ContentCollection getContentByType(String siteKey, String contentType, String orderBy, String orderDirection, int count, int page)
             throws ConnectionException, NotFoundException;
-
-    List<Page> getPages(String siteKey)
-            throws ClientException;
-
-    void savePage(String key, Page page)
-            throws ClientException;
 }

@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PostgresqlClient
+public class PostgreSqlClient
         implements Client
 {
 
@@ -381,7 +381,7 @@ public class PostgresqlClient
     }
 
     @Override
-    public void savePage(String key, Page page)
+    public void savePage(Page page)
             throws ClientException
     {
         throw new NotImplementedException();

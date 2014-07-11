@@ -4,6 +4,6 @@ public class ClientFactory
 {
     public static Client create()
     {
-        return new PostgresqlClient();
+        return new PostgreSqlClient();
     }
 }

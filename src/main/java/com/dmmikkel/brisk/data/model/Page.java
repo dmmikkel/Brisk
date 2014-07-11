@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Page
         implements Serializable
 {
+    private String siteKey;
     private String key;
     private String name;
 
@@ -116,5 +117,15 @@ public class Page
     public void setCount(int count)
     {
         this.count = count;
+    }
+
+    public String getSiteKey()
+    {
+        return siteKey;
+    }
+
+    public void setSiteKey(String siteKey)
+    {
+        this.siteKey = siteKey;
     }
 }
