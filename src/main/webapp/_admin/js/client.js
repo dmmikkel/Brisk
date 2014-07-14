@@ -34,7 +34,17 @@ function loadPages() {
     var pages = client.getPages(function(pages){
         for (var i = 0; i < pages.length; i++) {
             var page = pages[i];
-            var el = $("<a/>").attr("href", "#").addClass("list-group-item").text(page.name);
+            var el = $("<a/>").attr("href", "#")
+                .addClass("list-group-item")
+                .addClass("page-item")
+                .text(page.name)
+                .click(function(e){
+                    e.preventDefault();
+                    var self = $(this);
+                    $("#page-name").val(self.text());
+                    $(".page-item").removeClass("active");
+                    self.addClass("active");
+                });
             $(".page-list").append(el);
         };
     });
