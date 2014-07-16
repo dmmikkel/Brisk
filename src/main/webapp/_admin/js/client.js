@@ -26,26 +26,54 @@ var BriskClient = (function($, undefined){
 
 })(jQuery);
 
-var client = new BriskClient({});
+/* Data binding */
+(function(BriskBinding, $, undefined){
 
-function loadPages() {
-    var list = $(".page-list");
-    list.empty();
-    var pages = client.getPages(function(pages){
+    var briskClient = new BriskClient({});
+
+    var pages;
+
+    var objectPageListeners;
+    var eachPageListeners;
+
+    $(function(){
+        objectPageListeners = $("*[data-brisk-object='page']");
+        eachPageListeners = $("*[data-brisk-each='page']");
+
+        loadPages();
+    });
+
+    BriskBinding.setPages = function(p) {
+        pages = p;
+        updatePages();
+    };
+
+    function loadPages() {
+        briskClient.getPages(function(json){
+            pages = json;
+            updatePages();
+        });
+    }
+
+    function updatePages() {
         for (var i = 0; i < pages.length; i++) {
             var page = pages[i];
-            var el = $("<a/>").attr("href", "#")
-                .addClass("list-group-item")
-                .addClass("page-item")
-                .text(page.name)
-                .click(function(e){
-                    e.preventDefault();
-                    var self = $(this);
-                    $("#page-name").val(self.text());
-                    $(".page-item").removeClass("active");
-                    self.addClass("active");
-                });
-            $(".page-list").append(el);
-        };
-    });
-}
+            var objectListeners = objectPageListeners.filter(function(){
+                return $(this).data("brisk-key") == page.key
+            });
+            mapObject(page, objectListeners);
+
+        }
+    }
+
+    function mapObject(object, parents) {
+        parents.find("*[data-brisk-property]").each(function(){
+            var self = $(this);
+            if (self.is("input")
+                self.val(object[self.data("brisk-property")]);
+            else
+                self.text(object[self.data("brisk-property")]))
+        });
+    }
+
+})(window.BriskBinding = window.BriskBinding || {}, jQuery);

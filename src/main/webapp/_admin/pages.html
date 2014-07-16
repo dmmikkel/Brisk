@@ -12,11 +12,6 @@
     <style>
         body { padding-top: 70px; }
     </style>
-    <script type="text/javascript">
-        $(function(){
-            loadPages();
-        });
-    </script>
 </head>
 <body>
     
@@ -46,52 +41,107 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-sm-12 col-md-4">
-                    <div class="list-group page-list"></div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="list-group page-list" data-brisk-each="page">
+                        <a href="#" data-brisk-property="name" data-brisk-key="key">NAME</a>
+                    </div>
                 </div>
-                <div class="col-sm-12 col-md-8">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Page</h3>
-                      </div>
-                        <div class="panel-body">
-                            <form role="form" class="form-horizontal">
+                <div class="col-xs-12 col-sm-8 col-md-8">
+                    <form role="form" class="form-horizontal js-client-object" data-brisk-object="page" data-brisk-key="index">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Page</h3>
+                            </div>
+                            <div class="panel-body">
                                 <div class="form-group">
-                                    <label for="page-name" class="control-label col-xs-12 col-sm-3">Name</label>
-                                    <div class="col-xs-12 col-sm-9">
-                                        <input type="text" class="form-control" id="page-name">
+                                    <label for="page-name" class="control-label col-xs-12 col-sm-4">Name</label>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <input type="text" class="form-control" id="page-name" data-brisk-property="name">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="page-key" class="control-label col-xs-12 col-sm-3">URL</label>
-                                    <div class="col-xs-12 col-sm-9">
-                                        <input type="text" class="form-control" id="page-key">
+                                    <label for="page-key" class="control-label col-xs-12 col-sm-4">URL</label>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <input type="text" class="form-control" id="page-key" data-brisk-property="key">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Templates</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="page-master-template" class="control-label col-xs-12 col-sm-4">Master Template</label>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <input type="text" class="form-control" id="page-master-template" data-brisk-property="masterTemplate">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="page-master-template" class="control-label col-xs-12 col-sm-3">Master Template</label>
-                                    <div class="col-xs-12 col-sm-9">
-                                        <input type="text" class="form-control" id="page-master-template">
+                                    <label for="page-template" class="control-label col-xs-12 col-sm-4">Template</label>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <input type="text" class="form-control" id="page-template" data-brisk-property="template">
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Content Query</h3>
+                            </div>
+                            <div class="panel-body">
                                 <div class="form-group">
-                                    <label for="page-template" class="control-label col-xs-12 col-sm-3">Template</label>
-                                    <div class="col-xs-12 col-sm-9">
-                                        <input type="text" class="form-control" id="page-template">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="page-content-query-method" class="control-label col-xs-12 col-sm-3">Content Query</label>
-                                    <div class="col-xs-12 col-sm-9">
+                                    <label for="page-content-query-method" class="control-label col-xs-12 col-sm-4">Select</label>
+                                    <div class="col-xs-12 col-sm-8">
                                         <select id="page-content-query-method" class="form-control">
                                             <option value="1">Single Content</option>
-                                            <option value="2">List Content</option>
+                                            <option value="2">Content Type</option>
                                         </select>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="form-group">
+                                    <label for="page-content-key" class="control-label col-xs-12 col-sm-4">Content Key</label>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <input type="text" class="form-control" id="page-content-key">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="page-content-type" class="control-label col-xs-12 col-sm-4">Content Type</label>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <select id="page-content-type" class="form-control">
+                                            <option value="1">Article</option>
+                                            <option value="2">Document</option>
+                                            <option value="3">Person</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="page-content-order-by" class="control-label col-xs-12 col-sm-4">Order by</label>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <select id="page-content-order-by" class="form-control">
+                                            <option value="publishfrom">Publish date</option>
+                                            <option value="publishto">Expire date</option>
+                                            <option value="created">Created date</option>
+                                            <option value="customorder">Custom</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <select id="page-content-order-direction" class="form-control">
+                                            <option value="asc">Increasing</option>
+                                            <option value="desc">Decreasing</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="page-content-count" class="control-label col-xs-12 col-sm-4">Content per page</label>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <input type="text" class="form-control" id="page-content-count">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
